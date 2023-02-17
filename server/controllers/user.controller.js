@@ -1,5 +1,4 @@
-// DELETE THIS LINE
-// const selectAll = () => {};
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -11,22 +10,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// const db = require("../database-mysql");
+
 const User = require("../database-mongo/Item.model.js");
 
-// UNCOMMENT IF USING MYSQL WITH CALLBACKS
-// const selectAll = function (req, res) {
-//   db.query("SELECT * FROM items", (err, items, fields) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(200).send(items);
-//     }
-//   });
-// };
 
-// UNCOMMENT IF USING MONGOOSE WITH PROMISES
 const selectAll = function (req, res) {
 
   User.find({})
@@ -98,18 +85,38 @@ const verifyUser = (req, res) => {
     // if(!response) {res.json("Please verify email")}
     // console.log(response)
     
-      
-   
 
+    const UpdateUimg = async function (req,res) {
+      console.log(req.body);
+      try {
+        const filter = { _id: req.params.id }
+        const push = { $push: { img: req.body.img } }
+        const updated = await User.findOneAndUpdate(filter, push);
+        res.json(updated);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+    };
+  
+    const updateOne = async (req, res) => {
+      try {
+        const filter = {_id:req.params.id }
+        const updated = await User.findOneAndUpdate(filter,req.body)
+        res.json(updated)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    const deleteOne = async (req, res) => {
+      try {
+        const dell = req.params.id
+        const del = await User.deleteOne({ _id: dell })
+        res.json(del)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
 
-// UNCOMMENT IF USING MONGOOSE WITH PROMISES & ASYNC AWAIT
-// const selectAll = async function (req, res) {
-//   try {
-//     const items = await Item.find({});
-//     res.status(200).send(items);
-//   } catch (error) {
-//     res.status(200).send(error);
-//   }
-// };
-
-module.exports = { selectAll, saveUser, verifyUser };
+module.exports = { selectAll, saveUser, verifyUser ,deleteOne, updateOne, UpdateUimg};

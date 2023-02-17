@@ -13,4 +13,21 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+const postSchema = new mongoose.Schema({
+  Price : Number,
+  type: String,
+  for : String,
+  NbofBedrooms: Number,
+  NbofBeds : Number,
+  NbofBathrooms : Number,
+  NbofKitchen:Number,
+  Area: Number,
+  description: String,
+  Adress: String, 
+  images: [String],
+  user:{type: mongoose.Types.ObjectId, ref: "User"}
+})
+
+const Post = mongoose.model("Post", postSchema);
+
+module.exports = {User,Post};

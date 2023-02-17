@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoUri = "mongodb://127.0.0.1/mvp";
+const mongoUri = "mongodb://127.0.0.1/Housify";
 mongoose.set('strictQuery', true)
 
 mongoose.connect(mongoUri, { useUnifiedTopology: true, useNewUrlParser: true }, () => {

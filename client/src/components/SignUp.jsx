@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 import { Card, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios"
+
 
 
 export default function SignUp() {
@@ -13,6 +15,8 @@ export default function SignUp() {
   const [img, setImg] = useState(null);
   const [confirmPassword, setConfirmpassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const navigate=useNavigate()
 
   const handleName = (e) => {
     e.preventDefault();
@@ -78,25 +82,32 @@ export default function SignUp() {
       let options ={
         ContentType : "Application/json"
       }
-      axios.post("/api/items/SignUp", data,options)
+      axios.post("/api/items/SignUp", data,options);
+      navigate("/SignIn")
     }
   }
   };
 
   return (
-    <>
-      <Card>
-        <Card.Body>
+    <div className='aziz'><Card  className="signup"
+      style={{ height: "90vh" , width: "150vh"}}>
+        <Card.Body className="w-70 h-100"  style={{ maxWidth: "600px" ,marginBottom: "12px" }}>
           <h2 className="text-center mb-4">Sajjel Rou7ek</h2>
           <Form onSubmit={onSubmitData}>
+           
+            <div className='namelast'> 
+            
+            
             <Form.Group className="mb-1">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" required onChange={handleName} />
+              <pre> <Form.Label>Name</Form.Label> <Form.Control type="text" required onChange={handleName} /> <Form.Label>lastName</Form.Label> <Form.Control type="text" required onChange={handleLastName} />
+              </pre>
             </Form.Group>
-            <Form.Group className="mb-1">
-              <Form.Label>lastName</Form.Label>
-              <Form.Control type="text" required onChange={handleLastName} />
-            </Form.Group>
+           
+            
+            
+            </div>
+           <div className='email&age'>
+
             <Form.Group className="mb-1">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" required onChange={handleEmail} />
@@ -105,6 +116,9 @@ export default function SignUp() {
               <Form.Label>Age</Form.Label>
               <Form.Control type="number" required onChange={handleAge} />
             </Form.Group>
+            </div>
+
+<div className='number&image'>
             <Form.Group className="mb-1">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
@@ -113,6 +127,14 @@ export default function SignUp() {
                 onChange={handlePhoenNumber}
               />
             </Form.Group>
+            <Form.Group className="mb-1">
+              <Form.Label>Image Profile</Form.Label>
+              <Form.Control type="file" required onChange={hansdleimg} />
+            </Form.Group>
+            </div>
+
+
+<div className='pass&conf'>
             <Form.Group className="mb-1">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -129,19 +151,22 @@ export default function SignUp() {
                 onChange={handleConfirmPassword}
               />
             </Form.Group>
-            <Form.Group className="mb-1">
-              <Form.Label>Image Profile</Form.Label>
-              <Form.Control type="file" required onChange={hansdleimg} />
-            </Form.Group>
+            </div>
+
+
+
+          
             <Button className="w-100 mt-4" type="submit ">
               Enzel
             </Button>
           </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
+          <div className="w-100 text-center mt-2" onClick={()=>(navigate("/SignIn"))}>
         3ndek Compte ? Connecti mela !!
       </div>
-    </>
+        </Card.Body>
+      </Card></div>
+      
+      
+    
   );
 }

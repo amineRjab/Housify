@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router'
+import Profile from './Profile.jsx'
 import { Card, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -6,6 +8,8 @@ import axios from "axios";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate=useNavigate()
 
   let user = {
     email: email,
@@ -32,21 +36,23 @@ const SignIn = () => {
 
     axios.post("/api/items/SignIn", user, options)
     .then(response=>{
-      console.log(response)
-      console.log(response.data.accessToken)
+      // console.log(response)
+      // console.log(response.data.accessToken)
       let token = response.data.accessToken
       console.log("post========>",token)
         localStorage.setItem('bearer', "bearer " +token)
     })
     .catch(err=>{console.log(err)});
+    navigate("/Profile")
   };
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Login</h2>
-          <Form onSubmit={onSubmitdata}>
+      <Card className="easy"
+      style={{ minHeight: "70vh" , width: "50vh"}}>
+        <Card.Body className="w-100 h-100"  style={{ maxWidth: "600px" ,marginTop: "72px" }}>
+          <img className="loginlogo" src="https://res.cloudinary.com/dsaso2a8g/image/upload/v1676591910/logoC_cscfdg.png"/>
+          <Form  className="form" onSubmit={onSubmitdata}>
             <Form.Group className="mb-1">
               <Form.Label>E-mail</Form.Label>
               <Form.Control type="email" required onChange={handleEmail} />
@@ -63,11 +69,12 @@ const SignIn = () => {
               Enzel
             </Button>
           </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
+          <div className="w-100 text-center mt-2" onClick={()=>(navigate("/SignUp"))}>
         Ma3ndekch Compte!! Fech Testanna !!
       </div>
+        </Card.Body>
+      </Card>
+      
     </>
   );
 };
