@@ -1,7 +1,8 @@
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+const nodemailer=require("nodemailer")
+const fs = require('fs');
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 cloudinary.config({
@@ -11,8 +12,14 @@ cloudinary.config({
 });
 
 
-const User = require("../database-mongo/Item.model.js");
-
+const {User} = require("../database-mongo/Item.model.js");
+const transporter = nodemailer.createTransport({
+ service:"gmail",
+  auth: {
+    user: "Aminerjab93@gmail.com",
+    pass: "pnpzkhpqsumpujsz",
+  },
+});
 
 const selectAll = function (req, res) {
 
@@ -50,7 +57,42 @@ const saveUser = (req, res) => {
             password: hash,
             img: response.url,
             contact: req.body.contact,
+
+          
+          }).then((User) => {
+            const mailOptions = {
+              from:"Aminerjab93@gmail.com" ,
+              to: User.email,
+              subject: "Welcome to housify",
+              text: `Dear ${User.FirstName},
+Thank you for registering with Housify! We are thrilled to have you as a member of our online community.
+
+Thank you again for joining us . We look forward to seeing you online!
+Best regards,
+
+ AmineRjab
+Housify Team
+
+// `,
+//     attachments: [{
+//         filename: 'housify.png',
+//         path: 'C:/Users/ilhem/Desktop/Housify/client/dist/assets/housify.png',
+//         cid: 'unique@kreata.ee' 
+//     }],
+//      html: '<img src="cid:unique@kreata.ee"/>'
+
+
+            };
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log("Email sent: " + info.response);
+              }
+            });
+            res.status(201).send(User);
           });
+          
         })
         .catch((err) => console.error(err.message));
     })
