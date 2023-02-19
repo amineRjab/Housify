@@ -89,17 +89,19 @@ export default function SignUp() {
   };
 
   return (
-    <div className='aziz'><Card  className="signup"
-      style={{ height: "90vh" , width: "150vh"}}>
+    <div className='aziz'>
+      
+      <Card  className="signup"
+      style={{ height: "80vh" , width: "100vh"}}>
         <Card.Body className="w-70 h-100"  style={{ maxWidth: "600px" ,marginBottom: "12px" }}>
-          <h2 className="text-center mb-4">Sajjel Rou7ek</h2>
+          <h2 className="text-center mb-4">SignUp</h2>
           <Form onSubmit={onSubmitData}>
            
             <div className='namelast'> 
             
             
             <Form.Group className="mb-1">
-              <pre> <Form.Label>Name</Form.Label> <Form.Control type="text" required onChange={handleName} /> <Form.Label>lastName</Form.Label> <Form.Control type="text" required onChange={handleLastName} />
+              <pre> <Form.Label>FirstName</Form.Label> <Form.Control type="text" required onChange={handleName} /> <Form.Label>lastName</Form.Label> <Form.Control type="text" required onChange={handleLastName} />
               </pre>
             </Form.Group>
            
@@ -157,14 +159,15 @@ export default function SignUp() {
 
           
             <Button className="w-100 mt-4" type="submit ">
-              Enzel
+              Create account
             </Button>
           </Form>
           <div className="w-100 text-center mt-2" onClick={()=>(navigate("/SignIn"))}>
-        3ndek Compte ? Connecti mela !!
+       If you have account you can LogIn
       </div>
         </Card.Body>
-      </Card></div>
+      </Card>
+      <p className="disclaimer">with Housify your income will got height initul they reach the sky </p></div>
       
       
     
