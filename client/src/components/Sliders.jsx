@@ -4,8 +4,9 @@ import React, { useEffect, useState,useRef } from 'react'
 
 const  Sliders = ()  =>{
     const colors = ['url("https://i.ibb.co/qxyfWpX/oneeee.jpg")'
-    ,'url("https://i.ibb.co/qxyfWpX/oneeee.jpg")',
-    'url("https://i.ibb.co/qxyfWpX/oneeee.jpg")'];
+    ,'url("https://i.ibb.co/Sww8Lk8/three.jpg")',
+    'url("https://i.ibb.co/WWpXQhJ/two.jpg")'
+,'url("https://i.ibb.co/6sGtNNk/four.jpg")'];
 const delay = 2500;
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);

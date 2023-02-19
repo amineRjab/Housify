@@ -1,19 +1,17 @@
 const mongoose = require("mongoose");
 const db = require("./index.js");
 
-
 const userSchema = new mongoose.Schema({
   FirstName: String,
   LastName: String,
-  Age:Number, 
-  email:{type:String,unique:true},
+  Age: Number,
+  email: { type: String, unique: true },
   password: String,
-  img:[String],
-  contact:String
+  img: [String],
+  contact: String,
 });
 
-const User = mongoose.model("User",userSchema)
-
+const User = mongoose.model("User", userSchema);
 
 const postSchema = new mongoose.Schema({
   Price : Number,
@@ -32,4 +30,4 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model("Post", postSchema);
 
-module.exports = {Post,User};
+module.exports = {User,Post};

@@ -7,7 +7,7 @@ const Search = (props) => {
           
     <div className="bar">
       <input className="searchbar" type="text" title="Search" />
-      <a href="http://localhost:3000/"> <img className="voice" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="r" /></a>
+      <a href="http://localhost:3000/"> <img className="voice" src="https://res.cloudinary.com/dsaso2a8g/image/upload/v1676575174/logos_mt94zx.jpg" /></a>
     </div>
    
     </div>

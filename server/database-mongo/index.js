@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', true)
 const mongoUri = "mongodb://127.0.0.1/Housify";
+mongoose.set('strictQuery', true)
 
 mongoose.connect(mongoUri, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
   console.log("db connected");

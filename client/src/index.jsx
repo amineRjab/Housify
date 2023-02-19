@@ -1,82 +1,93 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import Home from "./components/Home.jsx"
-import About from "./components/About.jsx"
 import { BrowserRouter, Link, Route, Routes ,Switch} from 'react-router-dom'
-import Login from './components/Login.jsx'
+import $ from 'jquery'
 import SignUp from './components/SignUp.jsx'
+import { Container } from 'react-bootstrap'
+import SignIn from './components/SignIn.jsx'
 import Items from './components/Items.jsx'
 import axios from 'axios'
 import Profile from './components/Profile.jsx'
+import Home from "./components/Home.jsx"
+import About from "./components/About.jsx"
+import Search from './components/Search.jsx'
+import Update from './components/Update.jsx'
+import Userposts from './components/Userposts.jsx'
+import Addproudect from './components/Addproudect.jsx'
+import Aganse from './components/Aganse.jsx'
+
 
 
 const App = () => {
-  const [users,setUsers]=useState([])
-  const [upd,setUpd]=useState(false)
-  const [items,setItems]=useState([])
+  const [user, setUser] = useState([])
+  const [data,setdata]=useState([])
+  const [relod,Setrelod]=useState(false)
 
-  useEffect(()=>{
-axios.get("/api/users")
-.then((res)=>(setUsers(res.data)))
-.catch((err)=>(console.log(err)))
-  },[upd])
+  useEffect(() => {
+    $.ajax({
+      url: '/api/items',
+      success: (data) => {
+        console.log(data)
+        setUser(data)
+      },
+      headers : {"authorization" : localStorage.getItem("bearer")},
+      error: (err) => {
+        console.log('err', err)
+      },
+    })
+  }, [])
 
-  useEffect(()=>{
-    axios.get("/api/housify")
-    .then((res)=>(setItems(res.data)))
-    .catch((err)=>(console.log(err)))
-      },[upd])
+  useEffect(()=> {
+    axios.get("/api/housify").then((result)=>{
+    setdata(result.data)}).catch((err)=>{
+    console.log(err);
+    })},[relod])
 
-
-
-  const addUser = (name,LastName,Age,email,password,img,contact)=>{
-    axios.post("/api/users",{FirstName:name,LastName:LastName,Age:Age,email:email,password:password,img:img,contact:contact})
-    .then((res)=>(setUpd(!upd)))
-    .catch((err)=>(console.log(err)))
-  }
 
   const search = (query) => {
     console.log(query);
-let newData = items.filter((e) => {
+let newData = user.filter((e) => {
       return e.for.toLowerCase().includes(query.toLowerCase());
     });
     setItems(newData);
   };
+return (
+    <div>
+     
+       <BrowserRouter>
+    
+     <nav> 
+       <ul>    
+        <li> <Link to="/"  style={{marginLeft:"30px"}}>Home</Link> </li>  
+      <li><Link to="/about"  style={{marginLeft:"30px"}}>About us</Link></li>
+      <li><Link to="/items"  style={{marginLeft:"30px"}}>Posts</Link></li>
+      <li> <Link to="/SignIn"  style={{marginLeft:"30px"}}>Login</Link></li>
+      <li><Link to="/SignUp"  style={{marginLeft:"30px"}}>SignUp</Link></li>
+     
+     </ul>
+    <Search search={search}/>
+     </nav>
+     <Routes>
+       <Route exact path="/" element={<Home />}></Route>
+       <Route exact path="/about" element={<About/>}></Route>
+       <Route exact path="/items" element={<Items data={data} user={user}/>}></Route>
+       <Route exact path="/SignIn" element={<SignIn user={user} setUser={setUser} />}></Route>
+       <Route exact path="/SignUp" element={<SignUp  />}></Route>
+       <Route exact path="/Profile" element={<Profile user={user} search={search} data = {data}/>}></Route>
+       <Route exact path="/update" element={< Update  user={user} />}></Route>
+       <Route exact path="/userPosts" element={< Userposts data={data}  user={user} />}></Route>
+       <Route exact path="/addproudect" element={< Addproudect  user={user} relod={relod} Setrelod={Setrelod} />}></Route>
+       <Route exact path="/aganse" element={< Aganse  user={user} />}></Route>
+     </Routes>
+    
+     </BrowserRouter>
+     
+  
+     
+    </div>
+   )
 
   
-
-  return (
-   <div>
-    
-      <BrowserRouter>
-   
-    <nav> 
-      <ul>    
-       <li> <Link to="/"  style={{marginLeft:"30px"}}>Home</Link> </li>  
-     <li><Link to="/about"  style={{marginLeft:"30px"}}>About</Link></li>
-    <li><Link to="/items"  style={{marginLeft:"30px"}}>Items</Link></li>
-   <li> <Link to="/login"  style={{marginLeft:"30px"}}>Login</Link></li>
-    <li><Link to="/SignUp"  style={{marginLeft:"30px"}}>SignUp</Link></li>
-    </ul>
- 
-    </nav>
-    <Routes>
-      <Route exact path="/" element={<Home search={search}/>}></Route>
-      <Route exact path="/about" element={<About/>}></Route>
-      <Route exact path="/items" element={<Items/>}></Route>
-      <Route exact path="/login" element={<Login users={users} setUsers={setUsers} />}></Route>
-      <Route exact path="/SignUp" element={<SignUp  addUser={addUser}/>}></Route>
-      <Route exact path="/Profile" element={<Profile users={users}/>}></Route>
-    </Routes>
-   
-    </BrowserRouter>
-    
-    <footer>
-      <h1> Housify 4 Sell&Buy</h1>
-    </footer>
-    
-   </div>
-  )
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))

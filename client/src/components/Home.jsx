@@ -1,6 +1,6 @@
 import React from 'react'
-import {useNavigate} from "react-router-dom"
-import Search from './Search.jsx'
+// import {useNavigate} from "react-router-dom"
+
 import Sliders from './Sliders.jsx'
 const Home = (props) => {
 // const navigate= useNavigate()
@@ -15,7 +15,8 @@ const Home = (props) => {
     <div>
      <div className='home'></div>
      <Sliders />
-    <Search search={props.search}/>
+     <p className="disclaimer">with Housify your income will got height initul they reach the sky </p>
+    
     
     </div>
    
