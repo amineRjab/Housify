@@ -11,7 +11,7 @@ cloudinary.config({
 });
 
 
-const User = require("../database-mongo/Item.model.js");
+const {User} = require("../database-mongo/Item.model.js");
 
 
 const selectAll = function (req, res) {

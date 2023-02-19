@@ -15,6 +15,7 @@ const Home = (props) => {
     <div>
      <div className='home'></div>
      <Sliders />
+     <p className="disclaimer">with Housify your income will got height initul they reach the sky </p>
     
     
     </div>
