@@ -5,7 +5,7 @@ import { Card, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
-const SignIn = () => {
+const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +15,19 @@ const SignIn = () => {
     email: email,
     password: password,
   };
+
+  const handleClick=()=>{
+    const filtred=props.user.filter((e)=>{ 
+      return e.email===email})
+
+    console.log(filtred);
+    if(!!filtred.length){
+      props.setUser(filtred)
+      
+    }
+           
+        else alert("T rawwaa7 signUp")
+       navigate("/SignIn")}
 
   const handleEmail = (e) => {
     e.preventDefault();
@@ -50,7 +63,7 @@ const SignIn = () => {
     <>
       <Card className="easy"
       style={{ minHeight: "70vh" , width: "50vh"}}>
-        <Card.Body className="w-100 h-100"  style={{ maxWidth: "600px" ,marginTop: "72px" }}>
+        <Card.Body className="w-100 h-100"  style={{ maxWidth: "600px" ,marginTop: "33px" }}>
           <img className="loginlogo" src="https://res.cloudinary.com/dsaso2a8g/image/upload/v1676591910/logoC_cscfdg.png"/>
           <Form  className="form" onSubmit={onSubmitdata}>
             <Form.Group className="mb-1">
@@ -65,16 +78,16 @@ const SignIn = () => {
                 onChange={handlePassword}
               />
             </Form.Group>
-            <Button className="w-100 mt-4" type="submit ">
-              Enzel
+            <Button onClick={()=>(handleClick())} className="w-100 mt-4" type="submit ">
+              LogIn
             </Button>
           </Form>
           <div className="w-100 text-center mt-2" onClick={()=>(navigate("/SignUp"))}>
-        Ma3ndekch Compte!! Fech Testanna !!
+       If you don't have account you can create account
       </div>
         </Card.Body>
       </Card>
-      
+      <p className="disclaimer">with Housify your income will got height initul they reach the sky </p>
     </>
   );
 };

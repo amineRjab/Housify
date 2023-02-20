@@ -13,6 +13,7 @@ const selectPost = async function (req, res) {
   
 const addpost = async function (req, res) {
       try {
+        
           const id=req.params.id
         const items = await Post.create({
           Price : req.body.Price,
@@ -24,7 +25,7 @@ const addpost = async function (req, res) {
           NbofKitchen:req.body.NbofKitchen,
           Area: req.body.Area,
           description: req.body.description,
-          Address: req.body.Address, 
+          Adress: req.body.Adress, 
           images: req.body.images,
           user:id
         });
