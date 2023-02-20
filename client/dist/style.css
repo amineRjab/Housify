@@ -943,4 +943,15 @@ aside p {
   color: #c2149eb0;
  }
 
+.row .col-lg-3 {
+  padding: 0 !important;
+}
 
+.col-12 {
+  margin-left: 8%;
+}
+
+.parag {
+  font-weight: 150px;
+  font-size: large;
+}

@@ -167,7 +167,7 @@ export default function SignUp() {
       </div>
         </Card.Body>
       </Card>
-      <p className="disclaimer">with Housify your income will got height initul they reach the sky </p></div>
+      <p className="disclaimer">with Housify your income will get height until they reach the sky </p></div>
       
       
     

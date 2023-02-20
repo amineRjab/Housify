@@ -1,4 +1,4 @@
-import { Key } from '@mui/icons-material';
+
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router';
@@ -78,7 +78,7 @@ const [idd,Setidd]=useState("")
  
    
    )})}
-  <p className="disclaimer">with Housify your income will got height initul they reach the sky </p>
+  <p className="disclaimer">with Housify your income will get height until they reach the sky </p>
 
     </div>
     </div></>}

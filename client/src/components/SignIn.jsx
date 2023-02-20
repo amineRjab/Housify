@@ -87,7 +87,7 @@ const SignIn = (props) => {
       </div>
         </Card.Body>
       </Card>
-      <p className="disclaimer">with Housify your income will got height initul they reach the sky </p>
+      <p className="disclaimer">with Housify your income will get height until they reach the sky </p>
     </>
   );
 };
